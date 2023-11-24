@@ -12,6 +12,7 @@ local function autostart_apps()
 	-- 	awful.spawn("picom")
 	-- end)
 	--- Music Server
+	helpers.run.run_once_pgrep("pulseaudio")
 	helpers.run.run_once_pgrep("mpd")
 	helpers.run.run_once_pgrep("mpDris2")
 	--- Polkit Agent
@@ -23,17 +24,19 @@ local function autostart_apps()
 	helpers.run.run_once_grep("blueman-applet")
 	helpers.run.run_once_grep("nm-applet")
 
-	helpers.run.check_if_running("slack", nil, function()
-		awful.spawn("slack")
-	end)
+	-- helpers.run.check_if_running("slack", nil, function()
+	-- 	awful.spawn("slack")
+	-- end)
 	
-	helpers.run.check_if_running("electron_outlook", nil, function()
-		awful.spawn("electron-outlook")
-	end)
+	-- helpers.run.check_if_running("electron_outlook", nil, function()
+	-- 	awful.spawn("electron-outlook")
+	-- end)
 
 	helpers.run.check_if_running("albert", nil, function()
 		awful.spawn("albert")
 	end)
+
+
 end
 
 autostart_apps()

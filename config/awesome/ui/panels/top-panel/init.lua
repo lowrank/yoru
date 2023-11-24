@@ -283,7 +283,7 @@ return function(s)
 
 	--- Remove top_panel on full screen
 	local function remove_top_panel(c)
-		if c.fullscreen or c.maximized then
+		if c.fullscreen then
 			c.screen.top_panel.visible = false
 		else
 			c.screen.top_panel.visible = true
@@ -292,7 +292,7 @@ return function(s)
 
 	--- Remove top_panel on full screen
 	local function add_top_panel(c)
-		if c.fullscreen or c.maximized then
+		if c.maximized then
 			c.screen.top_panel.visible = true
 		end
 	end

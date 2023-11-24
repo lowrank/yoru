@@ -225,6 +225,18 @@ local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
 
+
+-- Task list
+theme.tasklist_font = theme.font_name .. "Regular 10"
+theme.tasklist_plain_task_name = true
+theme.tasklist_disable_icon = true
+theme.tasklist_bg_normal = theme.black
+theme.tasklist_bg_focus = theme.black
+theme.tasklist_bg_urgent = theme.black
+theme.tasklist_bg_minimize = theme.black
+theme.tasklist_fg_minimize = theme.accent
+theme.tasklist_fg_normal = theme.white
+
 --- Tag preview
 theme.tag_preview_widget_margin = dpi(10)
 theme.tag_preview_widget_border_radius = theme.border_radius
