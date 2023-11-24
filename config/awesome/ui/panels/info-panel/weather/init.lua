@@ -158,10 +158,10 @@ local weather_widget = wibox.widget({
 		hourly_widget_4,
 		hourly_widget_5,
 		hourly_widget_6,
-		spacing = dpi(10),
+		spacing = dpi(20),
 		layout = wibox.layout.flex.horizontal,
 	},
-	spacing = dpi(10),
+	spacing = dpi(20),
 	layout = wibox.layout.fixed.vertical,
 })
 
@@ -173,7 +173,7 @@ local show_daily_forecast = true
 local units = "metric"
 
 local url = (
-	"https://api.openweathermap.org/data/2.5/onecall"
+	"https://api.openweathermap.org/data/3.0/onecall"
 	.. "?lat="
 	.. coordinates[1]
 	.. "&lon="

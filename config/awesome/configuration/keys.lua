@@ -149,14 +149,24 @@ awful.keyboard.append_global_keybindings({
 
 	--- Brightness Control
 	awful.key({}, "XF86MonBrightnessUp", function()
-		awful.spawn("brightnessctl set 5%+ -q", false)
-		awesome.emit_signal("widget::brightness")
-		awesome.emit_signal("module::brightness_osd:show", true)
+		-- awful.spawn("brightnessctl set 5%+ -q", false)
+		awful.spawn.easy_async_with_shell([[xrandr --verbose | grep Brightness | awk 'FNR == 1 {printf "%2.2f", $NF}']], 
+		function(actual_brightness)
+			actual_brightness = tonumber(actual_brightness)
+			awful.spawn.with_shell([[xrandr --output eDP-1 --brightness ]] .. actual_brightness + .05) -- increase 5% 
+		end) 
+		-- awesome.emit_signal("widget::brightness")
+		-- awesome.emit_signal("module::brightness_osd:show", true)
 	end, { description = "increase brightness", group = "hotkeys" }),
 	awful.key({}, "XF86MonBrightnessDown", function()
-		awful.spawn("brightnessctl set 5%- -q", false)
-		awesome.emit_signal("widget::brightness")
-		awesome.emit_signal("module::brightness_osd:show", true)
+		-- awful.spawn("brightnessctl set 5%- -q", false)
+		awful.spawn.easy_async_with_shell([[xrandr --verbose | grep Brightness | awk 'FNR == 1 {printf "%2.2f", $NF}']], 
+		function(actual_brightness)
+			actual_brightness = tonumber(actual_brightness)
+			awful.spawn.with_shell([[xrandr --output eDP-1 --brightness ]] .. actual_brightness - .05) -- increase 5% 
+		end) 
+		-- awesome.emit_signal("widget::brightness")
+		-- awesome.emit_signal("module::brightness_osd:show", true)
 	end, { description = "decrease brightness", group = "hotkeys" }),
 
 	--- Volume control
@@ -208,6 +218,15 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod }, "Escape", function()
 		awesome.emit_signal("module::exit_screen:show")
 	end, { description = "exit screen", group = "hotkeys" }),
+
+	--- Un-minimize windows
+	awful.key({ mod, ctrl }, "n", function()
+		local c = awful.client.restore()
+		-- Focus restored client
+		if c then
+			c:activate({ raise = true, context = "key.unminimize" })
+		end
+	end, { description = "restore minimized", group = "client" }),
 })
 
 --- Client key bindings
@@ -298,15 +317,6 @@ client.connect_signal("request::default_keybindings", function()
 			-- minimized, since minimized clients can't have the focus.
 			c.minimized = true
 		end, { description = "minimize", group = "client" }),
-
-		--- Un-minimize windows
-		awful.key({ mod, ctrl }, "n", function()
-			local c = awful.client.restore()
-			-- Focus restored client
-			if c then
-				c:activate({ raise = true, context = "key.unminimize" })
-			end
-		end, { description = "restore minimized", group = "client" }),
 
 		--- Keep on top
 		awful.key({ mod }, "p", function(c)

@@ -105,7 +105,7 @@ local function cpu()
 			local cpu_value = 100 - tonumber(cpu_idle)
 
 			stats:set_value(cpu_value)
-			tooltip:set_markup_silently(helpers.ui.colorize_text(cpu_value .. "%", "#c1ebff"))
+			tooltip:set_markup_silently(helpers.ui.colorize_text("cpu: " .. cpu_value .. "%", "#c1ebff"))
 
 			collectgarbage("collect")
 		end
@@ -162,7 +162,7 @@ local function temperature()
 				local temp_value = (temp / 1000) / max_temp * 100
 
 				stats:set_value(temp_value)
-				tooltip:set_markup_silently(helpers.ui.colorize_text(temp_value .. "°C", "#a3cdff"))
+				tooltip:set_markup_silently(helpers.ui.colorize_text("temp: " .. temp_value .. "°C", "#a3cdff"))
 				collectgarbage("collect")
 			end)
 		end
@@ -200,7 +200,7 @@ local function ram()
 			local used_ram_percentage = (used / total) * 100
 
 			stats:set_value(used_ram_percentage)
-			tooltip:set_markup_silently(helpers.ui.colorize_text(string.format("%.1f", used / 1000) .. "G", "#85afe7"))
+			tooltip:set_markup_silently(helpers.ui.colorize_text("ram: " .. string.format("%.1f", used / 1000) .. "G", "#85afe7"))
 			collectgarbage("collect")
 		end
 	)
@@ -228,7 +228,7 @@ local function hdd()
 		local space_consumed = stdout:match("(%d+)")
 
 		stats:set_value(tonumber(space_consumed))
-		tooltip:set_markup_silently(helpers.ui.colorize_text(space_consumed .. "%", "#6791c9"))
+		tooltip:set_markup_silently(helpers.ui.colorize_text("disk: " .. space_consumed .. "%", "#6791c9"))
 		collectgarbage("collect")
 	end)
 

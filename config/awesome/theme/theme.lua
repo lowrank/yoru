@@ -17,7 +17,7 @@ local icons = require("icons")
 --- ░▀░░░▀▀▀░▀░▀░░▀░░▀▀▀
 
 --- Ui Fonts
-theme.font_name = "Roboto "
+theme.font_name = "MesloLGS NF "
 theme.font = theme.font_name .. "Medium 10"
 
 --- Icon Fonts
@@ -157,13 +157,15 @@ theme.music_accent = theme.lighter_black
 --- ░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀
 
 --- Wallpapers
-theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/wave.png")
+theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/wall.png")
+--  theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/wave.png")
 --- theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/yoru-dots.png")
 --- theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/mountain.jpg")
 --- theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/rocks.jpg")
 
 --- Image Assets
-theme.pfp = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/pfp.png")
+-- theme.pfp = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/pfp.png")
+theme.pfp = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/coffee.jpg")
 theme.music = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/music.png")
 
 --- Layout

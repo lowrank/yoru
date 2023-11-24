@@ -54,7 +54,8 @@ local brightness_slider = slider.brightness_slider
 
 brightness_slider:connect_signal("property::value", function()
 	local brightness_level = brightness_slider:get_value()
-	awful.spawn("brightnessctl set " .. brightness_level .. "%", false)
+	-- awful.spawn("brightnessctl set " .. brightness_level .. "%", false)
+	awful.spawn.with_shell([[xrandr --output eDP-1 --brightness ]] .. brightness_level/100 ) 
 
 	-- Update textbox widget text
 	osd_value.text = brightness_level .. "%"
@@ -81,10 +82,11 @@ brightness_slider:buttons(gears.table.join(
 ))
 
 local update_slider = function()
-	awful.spawn.easy_async_with_shell(
-		"brightnessctl | grep -i  'current' | awk '{ print $4}' | tr -d \"(%)\"",
-		function(stdout)
-			local value = string.gsub(stdout, "^%s*(.-)%s*$", "%1")
+	-- awful.spawn.easy_async_with_shell(
+	-- 	"brightnessctl | grep -i  'current' | awk '{ print $4}' | tr -d \"(%)\"",
+	awful.spawn.easy_async_with_shell([[xrandr --verbose | grep Brightness | awk 'FNR == 1 {printf "%2.2f", $NF}']], 	
+	function(stdout)
+			local value = tonumber(stdout)*100 --string.gsub(stdout, "^%s*(.-)%s*$", "%1")
 			brightness_slider:set_value(tonumber(value))
 			osd_value.text = value .. "%"
 		end
@@ -105,6 +107,7 @@ function brightness_action_jump()
 	else
 		new_value = 0
 	end
+	-- brightness_slider:set_value(new_value)
 	brightness_slider:set_value(new_value)
 end
 

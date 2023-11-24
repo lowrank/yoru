@@ -48,3 +48,7 @@ gears.timer({
 		collectgarbage("collect")
 	end,
 })
+
+-- awful.util.spawn("picom")
+-- awful.util.spawn("slack")
+-- awful.util.spawn("electron-outlook")
