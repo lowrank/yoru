@@ -12,7 +12,7 @@ local function autostart_apps()
 	-- 	awful.spawn("picom")
 	-- end)
 	--- Music Server
-	helpers.run.run_once_pgrep("pulseaudio")
+	helpers.run.run_once_pgrep("pulseaudio --restart")
 	helpers.run.run_once_pgrep("mpd")
 	helpers.run.run_once_pgrep("mpDris2")
 	--- Polkit Agent
