@@ -32,6 +32,11 @@ local notifbox_add = function(n, notif_icon, notifbox_color)
 
 	local notifbox_box = require("ui.panels.notification-panel.notif-center.build-notifbox.notifbox-builder")
 	notif_core.notifbox_layout:insert(1, notifbox_box(n, notif_icon, n.title, n.message, n.app_name, notifbox_color))
+
+	if #notif_core.notifbox_layout.children > 5 then
+		notif_core.notifbox_layout:remove(6)
+	end
+
 end
 
 naughty.connect_signal("request::display", function(n)
